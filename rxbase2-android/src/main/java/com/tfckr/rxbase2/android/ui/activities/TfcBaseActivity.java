@@ -28,10 +28,10 @@ import io.reactivex.subjects.PublishSubject;
 
 public class TfcBaseActivity<Presenter extends TfcBaseActivityPresenter> extends AppCompatActivity implements TfcBaseActivityView {
 
-    private final PublishSubject<Void> back = PublishSubject.create();
+    private final PublishSubject<Object> back = PublishSubject.create();
     private final BehaviorSubject<ActivityEvent> lifecycle = BehaviorSubject.create();
     private static final String PRESENTER_KEY = "presenter";
-    private CompositeDisposable disposables ;
+    private CompositeDisposable disposables;
 
     protected Presenter presenter;
 
@@ -162,7 +162,7 @@ public class TfcBaseActivity<Presenter extends TfcBaseActivityPresenter> extends
      * Call when the user wants triggers a back event, e.g. clicking back in a toolbar or pressing the device back button.
      */
     public void back() {
-        back.onNext(null);
+        back.onNext(0);
     }
 
     /**
