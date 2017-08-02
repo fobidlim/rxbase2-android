@@ -4,7 +4,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'signing'
 
-version = '0.8.1'
+version = '0.8.2'
 
 def siteUrl = 'https://github.com/fobid/rxbase2-android'       // Homepage URL of the library
 def gitUrl = 'https://github.com/fobid/rxbase2-android.git'    // Git repository URL
@@ -18,7 +18,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
-        versionName "0.8.1"
+        versionName "0.8.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
