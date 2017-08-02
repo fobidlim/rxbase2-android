@@ -1,7 +1,9 @@
 package com.tfckr.rxbase2.android.ui.data;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,7 +34,12 @@ public abstract class ActivityResult implements Parcelable {
 
     public static
     @NonNull
-    ActivityResult create(final int requestCode, final int resultCode, final @Nullable Intent intent) {
+    ActivityResult create(final int requestCode, final int resultCode, @Nullable Intent intent) {
+        if (intent == null) {
+            intent = new Intent();
+            intent.putExtras(new Bundle());
+            intent.setComponent(new ComponentName("", ""));
+        }
         return ActivityResult.builder()
                 .requestCode(requestCode)
                 .resultCode(resultCode)
