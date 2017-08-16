@@ -136,6 +136,13 @@ public class TfcBaseActivity<Presenter extends TfcBaseActivityPresenter> extends
         lifecycle.onNext(ActivityEvent.DESTROY);
         disposables.dispose();
         super.onDestroy();
+
+        if (isFinishing()) {
+            if (presenter != null) {
+                PresenterManager.getInstance().destroy(presenter);
+                presenter = null;
+            }
+        }
     }
 
     /**
@@ -163,6 +170,18 @@ public class TfcBaseActivity<Presenter extends TfcBaseActivityPresenter> extends
      */
     public void back() {
         back.onNext(0);
+    }
+
+    @CallSuper
+    @Override
+    protected void onSaveInstanceState(final @NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        final Bundle viewModelEnvelope = new Bundle();
+        if (presenter != null) {
+            PresenterManager.getInstance().save(presenter, viewModelEnvelope);
+        }
+
+        outState.putBundle(PRESENTER_KEY, viewModelEnvelope);
     }
 
     /**
